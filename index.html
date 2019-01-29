@@ -34,8 +34,11 @@
 	<div class="jumbotron">
 		<div class="container">
 			<div class="row">
-				<div class="col text-right">
-					<select class="form-control form-control-sm" id="cover_ratio" name="cover_ratio" onchange="refreshCover();">
+				<div class="col input-group input-group-md">
+					<div class="input-group-prepend">
+						<label class="input-group-text" for="cover_ratio">Choose ouput size</label>
+					</div>
+					<select class="custom-select form-control form-control-md" id="cover_ratio" name="cover_ratio" onchange="refreshCover();">
 						<option value="8">Steemit cover</option>
 						<option value="4.769230769230769">SoundCloud banner</option>
 						<option value="4">Twitch banner</option>
@@ -52,9 +55,10 @@
 						<option value="0.6669691470054446">Pinterest pin</option>
 						<option value="0.5625">9:16 ratio - Instagram story</option>
 					</select>
-				</div>
-				<div class="col text-left">
-					<input class="form-control-file form-control-md" type="file" id="imageLoader" name="imageLoader" />
+					<div class="input-group-append">
+						<label class="input-group-text" for="imageLoader">Upload square avatar</label>
+					</div>
+					<input class="d-none" type="file" id="imageLoader" name="imageLoader" />
 				</div>
 			</div>
 			<div class="row">
@@ -81,7 +85,7 @@
 	</div>
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
-	<script src="script.js?v2" type="text/javascript"></script>
+	<script src="script.js?v3" type="text/javascript"></script>
 	<script>
 	if (!supportsCanvas()) {
 		$('.jumbotron').text('This web-app needs browser with HTML5 canvas supported!');

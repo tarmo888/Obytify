@@ -149,14 +149,25 @@ function drawCover() {
 		ctx.drawImage(custom_img, custom_x, custom_y, custom_img.width, custom_img.height);
 		ctx.drawImage(logo, logo_x, logo_y, this.width, this.height);
 
-		if (!custom_img.rel && Math.round(custom_img_witdh/custom_img_height*10)/10 != 1) {
-			custom_img.rel = 'warned';
-			if (typeof ga === 'function') {
-				ga('send', 'event', 'file-upload', 'not-square');
+		if (!custom_img.rel) {
+			if (width_fits < 1 && height_fits < 1) {
+				custom_img.rel = 'warned';
+				if (typeof ga === 'function') {
+					ga('send', 'event', 'file-upload', 'not-big-enough');
+				}
+				setTimeout(function() {
+					alert('Not big enough avatar.\nPlease upload bigger resolution for better result.');
+				}, 1);
 			}
-			setTimeout(function() {
-				alert('Not square image.\nPlease upload square image for best result.');
-			}, 1);
+			else if (Math.round(custom_img_witdh/custom_img_height*10)/10 != 1) {
+				custom_img.rel = 'warned';
+				if (typeof ga === 'function') {
+					ga('send', 'event', 'file-upload', 'not-square');
+				}
+				setTimeout(function() {
+					alert('Not square avatar.\nPlease upload square image for better result.');
+				}, 1);
+			}
 		}
 	}
 	logo.src = 'obyte-mask.svg';
