@@ -2,11 +2,22 @@ function savePNG() {
 	try {
 		var data = canvas.toDataURL('image/png');
 		if (data.indexOf('data:image/png') == 0) {
-			data = data.replace('image/png', 'image/octet-stream');
+			if (typeof ga === 'function') {
+				ga('send', 'event', 'save-png', 'success');
+			}
 			downloadURI(data, "download.png");
+		}
+		else {
+			if (typeof ga === 'function') {
+				ga('send', 'event', 'save-png', 'unknown file');
+			}
+			alert('Unknown file type');
 		}
 	}
 	catch (e) {
+		if (typeof ga === 'function') {
+			ga('send', 'event', 'save-png', 'error');
+		}
 		alert(e.message);
 	}
 }
@@ -24,12 +35,18 @@ function supportsCanvas() {
 }
 function refreshCover() {
 	if (custom_img) {
+		if (typeof ga === 'function') {
+			ga('send', 'event', 'refresh-cover', 'custom-img-yes');
+		}
 		drawCover();
 	}
 	else {
 		$('#drawCover').hide();
 		$('#savePNG').hide();
 		$('#cover_canvas').hide();
+		if (typeof ga === 'function') {
+			ga('send', 'event', 'refresh-cover', 'custom-img-no');
+		}
 	}
 	if ($('#cover_ratio option:selected').attr('rel')) {
 		$('.ratio-text').hide();
@@ -44,6 +61,9 @@ function handleImage(e){
 	$('#drawCover').hide();
 	$('#savePNG').hide();
 	$('#cover_canvas').hide();
+	if (typeof ga === 'function') {
+		ga('send', 'event', 'file-upload', 'started');
+	}
 	var reader = new FileReader();
 	reader.onload = function(event){
 		custom_img = new Image();
@@ -51,6 +71,9 @@ function handleImage(e){
 			custom_img_witdh = this.width;
 			custom_img_height = this.height;
 			$('#drawCover').show();
+			if (typeof ga === 'function') {
+				ga('send', 'event', 'file-upload', 'uploaded');
+			}
 			drawCover();
 		}
 		custom_img.src = event.target.result;
@@ -128,6 +151,9 @@ function drawCover() {
 
 		if (!custom_img.rel && Math.round(custom_img_witdh/custom_img_height*10)/10 != 1) {
 			custom_img.rel = 'warned';
+			if (typeof ga === 'function') {
+				ga('send', 'event', 'file-upload', 'not-square');
+			}
 			setTimeout(function() {
 				alert('Not square image.\nPlease upload square image for best result.');
 			}, 1);

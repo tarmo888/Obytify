@@ -1,6 +1,6 @@
 # Obytify
 
-Obytify your social media account with a new tool that puts your avatar in the big O.
+Obytify your social media account with a tool that puts your avatar in the big O.
 
 ## License
 MIT
