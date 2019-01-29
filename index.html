@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Obytify by tarmo888</title>
+	<meta http-equiv="X-UA-Compatible" content="IE=edge;chrome=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name="format-detection"   content="telephone=no" />
+	<meta property="og:title" content="Obytify" />
+	<meta property="og:url" content="https://tarmo888.github.io/Obytify/" />
+	<meta property="og:image" content="https://tarmo888.github.io/Obytify/screenshot.png" />
+	<meta property="og:type" content="website" />
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha256-Md8eaeo67OiouuXAi8t/Xpd8t2+IaJezATVTWbZqSOw=" crossorigin="anonymous" />
+	<script src="script.js?v1" type="text/javascript"></script>
+	<script>
+	(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+	(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+	m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+	})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+	ga('create', 'UA-15428727-7', 'auto');
+	ga('send', 'pageview');
+	</script>
+</head>
+<body>
+	<div class="jumbotron">
+		<div class="container">
+			<div class="row">
+				<div class="col text-right">
+					<select class="form-control form-control-sm" id="cover_ratio" name="cover_ratio" onchange="refreshCover();">
+						<option value="8">Steemit cover</option>
+						<option value="4.769230769230769">SoundCloud banner</option>
+						<option value="4">Twitch banner</option>
+						<option value="3" selected="selected">Twitter header</option>
+						<option value="2.701587301587302">Facebook profile cover</option>
+						<option value="2.628205128205128">Facebook page cover</option>
+						<option value="2">2:1 ratio - Twitter post</option>
+						<option value="1.908127208480565">Instagram landscape post</option>
+						<option value="1.86">LinkedIn post</option>
+						<option value="1.777777777777778" rel="hd-ratio">16:9 ratio *</option>
+						<option value="1.333333333333333">4:3 ratio - Facebook post</option>
+						<option value="1" rel="square-ratio">1:1 ratio *</option>
+						<option value="0.8">4:5 ratio - Instagram portrait post</option>
+						<option value="0.6669691470054446">Pinterest pin</option>
+						<option value="0.5625">9:16 ratio - Instagram story</option>
+					</select>
+				</div>
+				<div class="col text-left">
+					<input class="form-control-file form-control-md" type="file" id="imageLoader" name="imageLoader" />
+				</div>
+			</div>
+			<div class="row">
+				<div class="col m-1 text-center">
+					<div class="ratio-text" id="hd-ratio" style="display:none;">* 16:9 ratio - Facebook event cover / YouTube channel art / YouTube thumbnail / Google+ cover / Twitch Video</div>
+					<div class="ratio-text" id="square-ratio" style="display:none;">* 1:1 ratio - Most profile pictures / Instagram square post</div>
+					<div class="ratio-text" id="other-ratio">&nbsp;</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col m-1 text-center">
+					<!--<input type="button" id="drawCover" name="drawCover" onclick="drawCover();" value="Draw cover" style="display:none;" />-->
+					<input class="btn btn-primary" type="button" id="savePNG" name="savePNG" onclick="savePNG();" value="Save to PNG file" style="display:none;" />
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-fluid mb-4">
+		<div class="row">
+			<div class="col text-center">
+				<canvas id="cover_canvas" style="display: none;border: 3px dashed silver;"></canvas>
+			</div>
+		</div>
+	</div>
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+	<script>
+	if (!supportsCanvas()) {
+		$('.jumbotron').text('This web-app needs browser with HTML5 canvas supported!');
+	}
+	var custom_img;
+	var custom_img_witdh = 0;
+	var custom_img_height = 0;
+
+	var imageLoader = document.getElementById('imageLoader');
+	imageLoader.addEventListener('change', handleImage, false);
+	var canvas = document.getElementById('cover_canvas');
+	refreshCover();
+	</script>
+</body>
+</html>
