@@ -10,5 +10,11 @@ MIT
 
 ## Thanks
 * https://github.com/jquery/jquery
-* https://github.com/twbs/bootstrap/tree/v4-dev
+* https://github.com/twbs/bootstrap
 * https://github.com/tholman/github-corners
+
+## Donations
+* [Github](https://github.com/sponsors/tarmo888)
+* [PayPal](https://www.paypal.me/tarmo888)
+
+[![Kivach](https://kivach.org/api/banner?repo=tarmo888/obytify)](https://kivach.org/repo/tarmo888/obytify)
